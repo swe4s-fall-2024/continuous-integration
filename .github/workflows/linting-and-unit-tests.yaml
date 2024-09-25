@@ -1,4 +1,4 @@
-name: Unit tests
+name: Pylint and pytest
 
 on:
   push:
@@ -7,34 +7,40 @@ on:
     branches: [ main ]
 
 jobs:
-  # run_style_check:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v2
-  #     - uses: conda-incubator/setup-miniconda@v2
-  #       with:
-  #         activate-environment: swe4s
-  #         environment-file: environment.yaml
-  #     - run: pylint $(git ls-files "*.py")
+  run_pylint:
+    name: Run pyint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup conda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          activate-environment: swe4s
+          environment-file: environment.yaml
+      - name: Run pylint
+        run: pylint $(git ls-files "*.py")
+
   run_pytest:
     name: Run pytest
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
     steps:
-    
-      - uses: actions/checkout@v2
-      - uses: conda-incubator/setup-miniconda@v2
+      - name: Checkout repo
+        uses: actions/checkout@v2
+      - name: Setup conda
+        uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: swe4s
           environment-file: environment.yaml
       - name: Conda info
-        shell: bash -el {0}
         run: |
           conda info
           conda list
-      # - name: Conda list
-      #   shell: pwsh
-      #   run: conda list
       - name: Run pytest
-        shell: bash -el {0}
         run: pytest
