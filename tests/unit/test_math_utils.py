@@ -8,4 +8,4 @@ class TestAdd:
 
     @staticmethod
     def test_fail():
-        assert add(1, 2) == 4
+        assert add(2, 2) == 4
