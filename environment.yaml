@@ -1,0 +1,8 @@
+name: swe4s
+channels:
+  - defaults
+dependencies:
+  - python=3.12
+  - pylint
+  - pytest
+prefix: /opt/anaconda3/envs/swe4s
