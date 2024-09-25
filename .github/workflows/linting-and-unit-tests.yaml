@@ -35,5 +35,6 @@ jobs:
       # - name: Conda list
       #   shell: pwsh
       #   run: conda list
-      # - run: |
-      #     pytest
+      - name: Run pytest
+        shell: bash -el {0}
+        run: pytest
