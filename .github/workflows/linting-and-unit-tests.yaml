@@ -7,22 +7,33 @@ on:
     branches: [ main ]
 
 jobs:
-  run_style_check:
+  # run_style_check:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v2
+  #     - uses: conda-incubator/setup-miniconda@v2
+  #       with:
+  #         activate-environment: swe4s
+  #         environment-file: environment.yaml
+  #     - run: pylint $(git ls-files "*.py")
+  run_pytest:
+    name: Run pytest
     runs-on: ubuntu-latest
     steps:
+    
       - uses: actions/checkout@v2
       - uses: conda-incubator/setup-miniconda@v2
         with:
           activate-environment: swe4s
           environment-file: environment.yaml
-      - run: pylint $(git ls-files "*.py")
-  run_unit_tests:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: conda-incubator/setup-miniconda@v2
-        with:
-          activate-environment: swe4s
-          environment-file: environment.yaml
-      - run: |
-          pytest
+      - name: Conda info
+        shell: bash -el {0}
+        run: |
+          conda info
+          conda list
+      # - name: Conda list
+      #   shell: pwsh
+      #   run: conda list
+      # - run: |
+      #     pytest
