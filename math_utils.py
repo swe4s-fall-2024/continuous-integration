@@ -1,6 +1,10 @@
-def add(a, b):
-    return a + b
+from math import sqrt
 
 
-def div(a, b):
-    return a / b
+def compute_sqr_root(input_val):
+    if input_val < 0:
+        raise ValueError(
+            "Input should be a positive number. Received a negative number",
+        )
+    else:
+        return sqrt(input_val)
