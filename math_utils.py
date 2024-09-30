@@ -8,3 +8,7 @@ def compute_sqr_root(input_val):
         )
     else:
         return sqrt(input_val)
+
+
+def add(a, b):
+    pass
